@@ -34,6 +34,8 @@ namespace ManhPackage.Unit
 
         public virtual void ShowAd() { }
 
+        public virtual void ShowAd(Vector2Int position) { }
+
         public virtual void HideAd() { }
 
         public virtual void DestroyAd() { }

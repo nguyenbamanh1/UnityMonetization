@@ -43,6 +43,7 @@ namespace ManhPackage.Unit.Admob
                     _interstitial.OnAdFullScreenContentOpened += OnAdDisplayOpened;
                     _interstitial.OnAdFullScreenContentFailed += (e) => OnAdDisplayFaild(e.ToString());
                     _interstitial.OnAdFullScreenContentClosed += OnAdDisplayClosed;
+                    _interstitial.OnAdImpressionRecorded += OnAdDisplayImpression;
                     OnAdLoaded();
                 });
         }

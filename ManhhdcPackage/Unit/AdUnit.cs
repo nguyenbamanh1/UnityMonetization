@@ -22,6 +22,9 @@ namespace ManhPackage.Unit
         public event Action OnAdDisplayOpenedEvent;
         public event Action<string> OnAdDisplayFaildEvent;
         public event Action OnAdDisplayClosedEvent;
+        public event Action OnAdDisplayImpressionEvent;
+
+        public string AdUnitId => _adUnit;
 
         public AdUnit(string _adUnit) { this._adUnit = _adUnit; }
 
@@ -46,5 +49,7 @@ namespace ManhPackage.Unit
         protected void OnAdDisplayFaild(string e) => GameDispatcher.Instance.ExecuteOnUpdate(() => OnAdDisplayFaildEvent?.Invoke(e));
 
         protected void OnAdDisplayClosed() => GameDispatcher.Instance.ExecuteOnUpdate(() => OnAdDisplayClosedEvent?.Invoke());
+
+        protected void OnAdDisplayImpression() => GameDispatcher.Instance.ExecuteOnUpdate(() => OnAdDisplayImpressionEvent?.Invoke());
     }
 }

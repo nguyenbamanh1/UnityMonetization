@@ -8,17 +8,17 @@ using UnityEngine;
 namespace ManhPackage.Unit.Max
 {
     [Serializable]
-    public class InterstitialMaxUnit : InterstitialUnit
+    public class InterstitialMaxUnit : InterstitialUnit, IMaxListener
     {
         public InterstitialMaxUnit(string _adUnit) : base(_adUnit)
         {
-            MaxSdkCallbacks.Interstitial.OnAdLoadedEvent += (s, a) => OnAdLoaded();
-            MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent += (s, a) => OnAdLoadFaild(a.ToString());
-            MaxSdkCallbacks.Interstitial.OnAdDisplayedEvent += (s, a) => OnAdDisplayOpened();
-            MaxSdkCallbacks.Interstitial.OnAdClickedEvent += (s, a) => OnAdClicked();
-            MaxSdkCallbacks.Interstitial.OnAdHiddenEvent += (s, a) => OnAdDisplayClosed();
-            MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent += (s, e, a) => OnAdDisplayFaild(e.ToString());
-            MaxSdkCallbacks.Interstitial.OnAdRevenuePaidEvent += (s, a) => OnAdPaid(new PaidFormat(_adUnit, a.Revenue));
+            MaxSdkCallbacks.Interstitial.OnAdHiddenEvent += OnMaxAdDisplayClosed;
+            MaxSdkCallbacks.Interstitial.OnAdRevenuePaidEvent += OnMaxAdPaid;
+            MaxSdkCallbacks.Interstitial.OnAdClickedEvent += OnMaxAdClicked;
+            MaxSdkCallbacks.Interstitial.OnAdLoadedEvent += OnMaxAdLoaded;
+            MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent += OnMaxAdLoadFaild;
+            MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent += OnMaxAdDisplayFailed;
+            MaxSdkCallbacks.Interstitial.OnAdDisplayedEvent += OnMaxAdDisplayed;
         }
 
         public override bool CanShowInterstitial()
@@ -47,5 +47,23 @@ namespace ManhPackage.Unit.Max
                 OnAdDisplayFaild(string.Empty);
             }
         }
+
+
+        public void OnMaxAdLoaded(string adUnit, MaxSdkBase.AdInfo adInfo) => OnAdLoaded();
+
+        public void OnMaxAdLoadFaild(string adUnit, MaxSdkBase.ErrorInfo adInfo) => OnAdLoadFaild(adInfo.ToString());
+
+        public void OnMaxAdClicked(string adUnit, MaxSdkBase.AdInfo adInfo) => OnAdClicked();
+
+        public void OnMaxAdPaid(string adUnit, MaxSdkBase.AdInfo adInfo) => OnAdPaid(new PaidFormat(adUnit, adInfo.Revenue));
+
+        public void OnMaxAdDisplayed(string adUnit, MaxSdkBase.AdInfo adInfo) => OnAdDisplayOpened();
+
+        public void OnMaxAdDisplayClosed(string adUnit, MaxSdkBase.AdInfo adInfo) => OnAdDisplayClosed();
+
+        public void OnMaxAdDisplayFailed(string adUnit, MaxSdkBase.ErrorInfo errorInfo, MaxSdkBase.AdInfo adInfo) =>
+            OnAdDisplayFaild(errorInfo.ToString());
+
+        public void OnAdHiddenEvent(string adUnit, MaxSdkBase.AdInfo adInfo) => OnAdDisplayClosed();
     }
 }

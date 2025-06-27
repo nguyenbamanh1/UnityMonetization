@@ -39,6 +39,7 @@ namespace ManhPackage.Unit.Admob
                 _aoa.OnAdFullScreenContentClosed += OnAdDisplayClosed;
                 _aoa.OnAdFullScreenContentOpened += OnAdDisplayOpened;
                 _aoa.OnAdFullScreenContentFailed += (v) => OnAdLoadFaild(v.ToString());
+                _aoa.OnAdImpressionRecorded += OnAdDisplayImpression;
                 OnAdLoaded();
             });
         }

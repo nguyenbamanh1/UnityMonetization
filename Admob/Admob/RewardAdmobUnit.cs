@@ -35,6 +35,7 @@ namespace ManhPackage.Unit.Admob
                 _rewardedAd.OnAdFullScreenContentClosed += OnAdDisplayClosed;
                 _rewardedAd.OnAdFullScreenContentFailed += (e) => OnAdDisplayFaild(e.ToString());
                 _rewardedAd.OnAdFullScreenContentOpened += OnAdDisplayOpened;
+                _rewardedAd.OnAdImpressionRecorded += OnAdDisplayImpression;
                 OnAdLoaded();
             });
         }
