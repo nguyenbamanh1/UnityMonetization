@@ -243,10 +243,11 @@ public class AdsExample : MonoBehaviour
 ```
 UnityMonetization/
 │
-├── UnityMonetization/              # Giao diện và lớp chung
+├── Core/              # Giao diện và lớp chung
 ├── Admob/             # Cài đặt và adapter cho AdMob
 ├── Max/               # Cài đặt và adapter cho AppLovin MAX
 └── IronSource/             # Các tiện ích hỗ trợ
+├── UnityMonetization/
 ```
 
 ---
