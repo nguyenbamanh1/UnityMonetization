@@ -12,10 +12,13 @@
 
   <ItemGroup>
     <Reference Include="Unity.LevelPlay">
-      <HintPath>..\..\NativeAdPlugin\Unity.LevelPlay.dll</HintPath>
+      <HintPath>..\Libs\Unity.LevelPlay.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\Libs\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.19f1\Editor\Data\PlaybackEngines\AndroidPlayer\Variations\mono\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\Libs\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
   </ItemGroup>
 

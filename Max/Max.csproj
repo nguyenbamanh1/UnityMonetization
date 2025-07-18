@@ -12,13 +12,13 @@
 
   <ItemGroup>
     <Reference Include="MaxSdk.Scripts">
-      <HintPath>..\..\..\Project\Piano_Monster\Ragdoll\Build\MaxSdk.Scripts.dll</HintPath>
+      <HintPath>..\Libs\MaxSdk.Scripts.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.19f1\Editor\Data\PlaybackEngines\AndroidPlayer\Variations\mono\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\Libs\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.19f1\Editor\Data\PlaybackEngines\AndroidPlayer\Variations\mono\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\Libs\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
   </ItemGroup>
 
