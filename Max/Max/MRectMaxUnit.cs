@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace ManhPackage.Unit.Max
+namespace UnityMonetization.Unit.Max
 {
     [Serializable]
     public class MRectMaxUnit : MRectUnit, IMaxListener
@@ -76,5 +76,21 @@ namespace ManhPackage.Unit.Max
         public void OnMaxAdClicked(string adUnit, MaxSdkBase.AdInfo adInfo) => OnAdClicked();
 
         public void OnMaxAdPaid(string adUnit, MaxSdkBase.AdInfo adInfo) => OnAdPaid(new PaidFormat(adUnit, adInfo.Revenue));
+
+        public void OnMaxAdDisplayed(string adUnit, MaxSdkBase.AdInfo adInfo)
+        {
+        }
+
+        public void OnMaxAdDisplayClosed(string adUnit, MaxSdkBase.AdInfo adInfo)
+        {
+        }
+
+        public void OnMaxAdDisplayFailed(string adUnit, MaxSdkBase.ErrorInfo errorInfo, MaxSdkBase.AdInfo adInfo)
+        {
+        }
+
+        public void OnAdHiddenEvent(string adUnit, MaxSdkBase.AdInfo adInfo)
+        {
+        }
     }
 }

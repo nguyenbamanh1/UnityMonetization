@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Unity.Services.LevelPlay;
 
-namespace ManhPackage.Unit.IronSource
+namespace UnityMonetization.Unit.IronSource
 {
     public class InterstitialIronUnit : InterstitialUnit
     {

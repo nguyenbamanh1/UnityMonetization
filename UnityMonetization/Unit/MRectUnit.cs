@@ -1,10 +1,10 @@
-﻿using ManhPackage.Unit;
+﻿using UnityMonetization.Unit;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace ManhPackage.Unit
+namespace UnityMonetization.Unit
 {
     public class MRectUnit : BannerUnit
     {

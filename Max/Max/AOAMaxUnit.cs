@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ManhPackage.Unit.Max
+namespace UnityMonetization.Unit.Max
 {
     [Serializable]
     public class AOAMaxUnit : AppOpenUnit, IMaxListener

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace ManhPackage.Unit.Max
+namespace UnityMonetization.Unit.Max
 {
     [Serializable]
     public class InterstitialMaxUnit : InterstitialUnit, IMaxListener

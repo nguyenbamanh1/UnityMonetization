@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace ManhPackage.Unit.Admob
+namespace UnityMonetization.Unit.Admob
 {
     [Serializable]
     public class BannerAmobUnit : BannerUnit

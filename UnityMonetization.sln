@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManhhdcPackage", "ManhhdcPackage\ManhhdcPackage.csproj", "{2F4660A1-321E-4272-BD4E-A89003759077}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnityMonetization", "UnityMonetization\UnityMonetization.csproj", "{2F4660A1-321E-4272-BD4E-A89003759077}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronSource", "IronSource\IronSource.csproj", "{9B0DF0F9-301E-467E-A796-CD0621591089}"
 EndProject

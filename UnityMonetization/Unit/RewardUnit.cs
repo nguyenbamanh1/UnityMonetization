@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Unity.IO.LowLevel.Unsafe;
 
-namespace ManhPackage.Unit
+namespace UnityMonetization.Unit
 {
     [Serializable]
     public abstract class RewardUnit : AdUnit

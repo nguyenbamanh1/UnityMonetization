@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ManhPackage.Unit
+namespace UnityMonetization.Unit
 {
     public abstract class AppOpenUnit : AdUnit
     {

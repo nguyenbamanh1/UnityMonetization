@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace ManhPackage.Unit.Admob
+namespace UnityMonetization.Unit.Admob
 {
     [Serializable]
     public class MRectAdmobUnit : MRectUnit

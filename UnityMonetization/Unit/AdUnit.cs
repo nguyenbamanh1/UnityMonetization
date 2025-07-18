@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace ManhPackage.Unit
+namespace UnityMonetization.Unit
 {
     [Serializable]
     public class AdUnit

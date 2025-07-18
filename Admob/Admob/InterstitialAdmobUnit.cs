@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ManhPackage.Unit.Admob
+namespace UnityMonetization.Unit.Admob
 {
     [Serializable]
     public class InterstitialAdmobUnit : InterstitialUnit

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ManhPackage.Unit.Max
+namespace UnityMonetization.Unit.Max
 {
     public interface IMaxListener
     {

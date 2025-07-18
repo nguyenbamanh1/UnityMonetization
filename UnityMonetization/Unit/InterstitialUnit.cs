@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ManhPackage.Unit
+namespace UnityMonetization.Unit
 {
     [Serializable]
     public abstract class InterstitialUnit : AdUnit
