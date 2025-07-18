@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        configuration: [Debug, Release]
+        configuration: [Release]
 
     runs-on: windows-latest  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -64,7 +64,9 @@ jobs:
       run: | 
         cd Winx64
         powershell Compress-Archive ${{ env.Configuration }} ${{ env.Configuration }}.zip
+        
     - name: Create Release
+      id: create_release
       uses: actions/create-release@v1
       with:
         tag_name: v1.0.0
@@ -73,3 +75,12 @@ jobs:
         prerelease: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload product to release
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: Winx64/${{ env.Configuration }}.zip
+        asset_name: ${{ env.Configuration }}.zip
+        asset_content_type: application/zip
+        
