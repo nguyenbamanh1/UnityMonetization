@@ -3,49 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
-    <AssemblyName>ManhhdcPackage.Core</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="GoogleMobileAds">
-      <HintPath>..\Libs\GoogleMobileAds.dll</HintPath>
-    </Reference>
-    <Reference Include="GoogleMobileAds.Android">
-      <HintPath>..\Libs\GoogleMobileAds.Android.dll</HintPath>
-    </Reference>
-    <Reference Include="GoogleMobileAds.Common">
-      <HintPath>..\Libs\GoogleMobileAds.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="GoogleMobileAds.Core">
-      <HintPath>..\Libs\GoogleMobileAds.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="GoogleMobileAds.iOS">
-      <HintPath>..\Libs\GoogleMobileAds.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="GoogleMobileAds.Ump">
-      <HintPath>..\Libs\GoogleMobileAds.Ump.dll</HintPath>
-    </Reference>
-    <Reference Include="GoogleMobileAds.Ump.Android">
-      <HintPath>..\Libs\GoogleMobileAds.Ump.Android.dll</HintPath>
-    </Reference>
-    <Reference Include="GoogleMobileAds.Ump.iOS">
-      <HintPath>..\Libs\GoogleMobileAds.Ump.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="GoogleMobileAds.Ump.Unity">
-      <HintPath>..\Libs\GoogleMobileAds.Ump.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="GoogleMobileAds.Unity">
-      <HintPath>..\Libs\GoogleMobileAds.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="MaxSdk.Scripts">
-      <HintPath>..\Libs\MaxSdk.Scripts.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine">
-      <HintPath>..\Libs\UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\Libs\UnityEngine.CoreModule.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Admob\Admob.csproj" />
+    <ProjectReference Include="..\IronSource\IronSource.csproj" />
+    <ProjectReference Include="..\Max\Max.csproj" />
   </ItemGroup>
 
 </Project>
