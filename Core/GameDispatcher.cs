@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
-namespace ManhhdcPackage
+namespace UnityMonetization.Core
 {
     internal class GameDispatcher : MonoBehaviour
     {

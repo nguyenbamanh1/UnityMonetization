@@ -48,7 +48,13 @@ Hoặc tải file `.dll` từ mục [Releases](https://github.com/nguyenbamanh1/
 > ⚠️ Bạn cần tự tích hợp SDK gốc của từng network theo hướng dẫn riêng của họ (UnityMonetization không bao gồm sẵn SDK gốc).
 
 ---
+> ⚠️ Đối với mạng `Admob` BannerPosition không hỗ trợ CenterLeft và CenterRight. MRect admob thực chất chỉ là banner ở dạng `MediumRectangle` `(300, 250)`
 
+> ⚠️ Đối với `Admob` kiểu `Adaptive` size sẽ được tự động hoá và `sizeType` sẽ không hoạt động
+
+> ⚠️ Đối với mạng `Max` Banner chỉ hỗ trợ `Normal` và `Adaptive`. Và banner không hỗ trợ `custom size`, chỉ nên dùng size `normal`
+
+> ⚠️ Đối với mạng `IronSource` không hỗ trợ `AOA unit`.
 
 ```csharp
 using UnityMonetization;

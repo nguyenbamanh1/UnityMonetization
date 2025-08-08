@@ -20,10 +20,30 @@ namespace UnityMonetization.Unit
         CenterRight,
     }
 
+    public enum BannerType
+    {
+        Normal,
+        Adaptive,
+        Collapsible_Bottom,
+        Collapsible_Top,
+    }
+
+    public enum BannerSize
+    {
+        Normal,
+        Medium,
+        IAB,
+        CustomSize,
+    }
+
     [Serializable]
     public class BannerUnit : AdUnit
     {
         [SerializeField] protected BannerPosition position = BannerPosition.Top;
+        [SerializeField] protected BannerType type = BannerType.Normal;
+
+        [SerializeField] protected BannerSize sizeType = BannerSize.Normal;
+        [SerializeField] protected Vector2Int customSize = default;
 
         public BannerUnit(string _adUnit, BannerPosition bannerPosition) : base(_adUnit)
         {
