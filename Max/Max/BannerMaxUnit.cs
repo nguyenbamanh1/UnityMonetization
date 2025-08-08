@@ -57,6 +57,12 @@ namespace UnityMonetization.Unit.Max
                 BannerPosition.CenterLeft => MaxSdk.BannerPosition.CenterLeft,
                 BannerPosition.CenterRight => MaxSdk.BannerPosition.CenterRight,
             };
+            switch (type)
+            {
+                case BannerType.Adaptive:
+                    MaxSdk.SetBannerExtraParameter(_adUnit, "adaptive_banner", "true");
+                    break;
+            }
             MaxSdk.CreateBanner(_adUnit, _position);
         }
 
