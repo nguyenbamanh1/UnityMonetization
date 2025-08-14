@@ -35,6 +35,8 @@ Hoặc tải file `.dll` từ mục [Releases](https://github.com/nguyenbamanh1/
 4. Unity sẽ tự động nhận diện và load thư viện.
 
 > ⚠️ Đối với Max và IronSource không thể chạy cùng 1 lúc 2 mạng cùng lúc bạn hãy tắt tuỳ chọn sử dụng `Max.dll` hoặc `IronSource.dll` trong Unity
+### Ignore IronSource
+![Logo](ignore_ironSource.png)
 ---
 
 ## 🛠️ Yêu cầu
@@ -57,8 +59,69 @@ Hoặc tải file `.dll` từ mục [Releases](https://github.com/nguyenbamanh1/
 > ⚠️ Đối với mạng `IronSource` không hỗ trợ `AOA unit`.
 
 ```csharp
-using UnityMonetization;
+namespace UnityMonetization
+{
+    [System.Serializable]
+    public abstract class AdOption
+    {
+        [SerializeField] public string _adName = string.Empty;
+        [SerializeField] public string _adUnitId = string.Empty;
+        [SerializeField] public AdUnitType _adNetType = AdUnitType.MAX;
+        public string AdName => _adName;
 
+        public string AdUnitId => _adUnitId;
+    }
+}
+
+namespace UnityMonetization
+{
+    [System.Serializable]
+    public class BannerOption : AdOption
+    {
+        [SerializeField] public BannerPosition position = BannerPosition.Top;
+        [SerializeField] public BannerType type = BannerType.Normal;
+
+        [SerializeField] public BannerSize sizeType = BannerSize.Normal;
+        [SerializeField] public Vector2Int customSize = default;
+
+        public BannerPosition Position => position;
+
+        public BannerType Type => type;
+
+        public BannerSize Size => sizeType;
+
+        public Vector2Int CustomSize => customSize;
+    }
+}
+
+namespace UnityMonetization
+{
+    [Serializable]
+    public class IntersititialOption : AdOption
+    {
+    }
+}
+
+namespace UnityMonetization
+{
+    [Serializable]
+    public class RewardOption : AdOption
+    {
+    }
+}
+
+namespace UnityMonetization
+{
+    [Serializable]
+    public class AppOpenOption : AdOption
+    {
+    }
+}
+```
+
+```csharp
+using UnityMonetization;
+using GoogleMobileAds.Api;
 
 public enum AdUnitType
 {
@@ -70,179 +133,29 @@ public enum AdUnitType
 public class AdsExample : MonoBehaviour
 {
 
-    [Header("Unit Config")]
-    [SerializeField] protected string _unitBannerId;
-    [SerializeField] private AdUnitType _bannerUnitType = AdUnitType.MAX;
-    [SerializeField] private BannerPosition _bannerPosition = BannerPosition.Top;
-    
-    [Space(10f)]
-    [SerializeField] protected string _unitAOAId;
-    [SerializeField] private AdUnitType _appOpenUnitType = AdUnitType.MAX;
+    [SerializeField] BannerOption _banner;
+    [SerializeField] IntersititialOption _inter;
+    [SerializeField] RewardOption _reward;
+    [SerializeField] AppOpenOption _aoa;
 
-    [Space(10f)]
-    [SerializeField] protected string _unitInterId;
-    [SerializeField] private AdUnitType _interUnitType = AdUnitType.MAX;
+    void Init()
+    {
+        MobileAds.Initialize((init) =>
+        {
+            _bannerUnit = UnityMonetizationFactory.CreateBanner(_banner.AdNetType, _banner.AdUnitId, _banner.Position);
+            _bannerUnit.SetType(_banner.Type);
+            _bannerUnit.SetSizeType(_banner.Size);
+            _bannerUnit.SetSize(_banner.CustomSize);
 
-    [Space(10f)]
-    [SerializeField] protected string _unitRewardId;
-    [SerializeField] private AdUnitType _rewardUnitType = AdUnitType.MAX;
-
-    BannerUnit _bannerUnit;
-    AppOpenUnit _appOpenUnit;
-    InterstitialUnit _interstitialUnit;
-    RewardUnit _rewardUnit;
-
-    /// <summary>
-    /// Event được gọi khi MobileAds.Initialize thành công
-    /// </summary>
-    event Action _InitializeAdmobEvent;
-
-    /// <summary>
-    /// Event được gọi khi callback MaxSdkCallbacks.OnSdkInitializedEvent được gọi
-    /// </summary>
-    event Action _InitializeMaxEvent;
-    void Start()
-    {
-        GenerateUnit();
-
-        //Listen Event cho các đơn vị quảng cáo
-        ...
-    
-        //kiểm tra xem có đơn vị quảng cáo nào là của Max không, nếu có thì sẽ gọi MaxSdk.InitializeSdk
-        if (_InitializeMaxEvent != null)
-        {
-            MaxSdk.SetVerboseLogging(true);
-            MaxSdkCallbacks.OnSdkInitializedEvent += (MaxSdkBase.SdkConfiguration sdkConfiguration) =>
-            {
-                _InitializeMaxEvent?.Invoke();
-                _maxInitialized = true;
-            };
-            MaxSdk.SetUserId("USER_ID");
-            MaxSdk.InitializeSdk();
-        }
-
-        //Initialize Admob
-        AdmobInitialized();
-    }
-    
-    private void AdmobInitialized()
-    {
-        if (!_admobInitialized)
-        {
-            MobileAds.Initialize((initStatus) =>
-            {
-                _InitializeAdmobEvent?.Invoke();
-                LoadNativeAd();
-                _InitializeAdmobEvent = null;
-                _admobInitialized = true;
-            });
-        }
-    }
-    
-    private void GenerateBanner()
-    {
-        Type type = null;
-        switch (_bannerUnitType)
-        {
-            case AdUnitType.MAX:
-                _bannerUnit = new BannerMaxUnit(_unitBannerId, _bannerPosition);
-                break;
-            case AdUnitType.Admob:
-                _bannerUnit = new BannerAmobUnit(_unitBannerId, _bannerPosition);
-                break;
-            case AdUnitType.IronSource:
-                _bannerUnit = new BannerIronUnit(_unitBannerId, _bannerPosition);
-                break;
-        }
-        if (!string.IsNullOrEmpty(_unitBannerId))
-        {
-            if (_bannerUnitType == AdUnitType.MAX)
-                _InitializeMaxEvent += LoadBanner;
-            else
-                _InitializeAdmobEvent += LoadBanner;
-        }
-    }
-    
-    private void GenerateAOA()
-    {
-        switch (_appOpenUnitType)
-        {
-            case AdUnitType.MAX:
-                _appOpenUnit = new AOAMaxUnit(_unitAOAId);
-                break;
-            case AdUnitType.Admob:
-                _appOpenUnit = new AOAAdmobUnit(_unitAOAId);
-                break;
-            case AdUnitType.IronSource:
-                break;
-        }
-        if (!string.IsNullOrEmpty(_unitAOAId))
-        {
-            if (_appOpenUnitType == AdUnitType.MAX)
-                _InitializeMaxEvent += LoadAOA;
-            else
-                _InitializeAdmobEvent += LoadAOA;
-        }
-    }
-    
-    private void GenerateInterstitial()
-    {
-        switch (_interUnitType)
-        {
-            case AdUnitType.MAX:
-                _interstitialUnit = new InterstitialMaxUnit(_unitInterId);
-                break;
-            case AdUnitType.Admob:
-                _interstitialUnit = new InterstitialAdmobUnit(_unitInterId);
-                break;
-            case AdUnitType.IronSource:
-                _interstitialUnit = new InterstitialIronUnit(_unitInterId);
-                break;
-        }
-        if (!string.IsNullOrEmpty(_unitInterId))
-        {
-            if (_interUnitType == AdUnitType.MAX)
-                _InitializeMaxEvent += LoadInterstitial;
-            else
-                _InitializeAdmobEvent += LoadInterstitial;
-        }
-    }
-    
-    private void GenerateReward()
-    {
-        switch (_rewardUnitType)
-        {
-            case AdUnitType.MAX:
-                _rewardUnit = new RewardMaxUnit(_unitRewardId);
-                break;
-            case AdUnitType.Admob:
-                _rewardUnit = new RewardAdmobUnit(_unitRewardId);
-                break;
-            case AdUnitType.IronSource:
-                _rewardUnit = new RewardIronUnit(_unitRewardId);
-                break;
-        }
-        if (!string.IsNullOrEmpty(_unitRewardId))
-        {
-            if (_rewardUnitType == AdUnitType.MAX)
-                _InitializeMaxEvent += LoadReward;
-            else
-                _InitializeAdmobEvent += LoadReward;
-        }
-    }
-    
-    private void GenerateUnit()
-    {
-        GenerateBanner();
-    
-        GenerateAOA();
-    
-        GenerateInterstitial();
-    
-        GenerateReward();
+            _interstitialUnit = UnityMonetizationFactory.CreateInter(_inter.AdNetType, _inter.AdUnitId);
+            _rewardUnit = UnityMonetizationFactory.CreateReward(_reward.AdNetType, _reward.AdUnitId);
+            _appOpenUnit = UnityMonetizationFactory.CreateAOA(_aoa.AdNetType, _aoa.AdUnitId);
+        });
     }
 }
 ```
+## Inspector Preview
+![Logo](preview.png)
 
 ## 📁 Cấu trúc thư viện
 
