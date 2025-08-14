@@ -36,7 +36,6 @@ namespace UnityMonetization.Unit
         CustomSize,
     }
 
-    [Serializable]
     public class BannerUnit : AdUnit
     {
         [SerializeField] protected BannerPosition position = BannerPosition.Top;
@@ -49,6 +48,12 @@ namespace UnityMonetization.Unit
         {
             position = bannerPosition;
         }
+
+        public virtual void SetType(BannerType type) => this.type = type;
+
+        public virtual void SetSizeType(BannerSize bannerSize) => this.sizeType = bannerSize;
+
+        public virtual void SetSize(Vector2Int size) => customSize = size;
 
         public virtual void LoadAd() { }
 
